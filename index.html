@@ -199,26 +199,7 @@
         }
     </script>
 
-    <!-- Audio Player: Dewa 19 - Aku Milikmu -->
-    <audio id="bg-music" loop preload="auto">
-        <source src="https://archive.org/download/dewa-19-aku-milikmu/Dewa%2019%20-%20Aku%20Milikmu.mp3" type="audio/mpeg">
-    </audio>
- <script>
-function toggleMusic() {
-  const music = document.getElementById('bg-music');
-  const playBtn = document.getElementById('playBtn');
-
-  if (music.paused) {
-    music.play().then(() => {
-      playBtn.textContent = '❚❚';
-    }).catch(() => {
-      alert('Musik belum bisa diputar. Coba lagi.');
-    });
-  } else {
-    music.pause();
-    playBtn.textContent = '▶';
-  }
-}
+    
 </script>
 
     
