@@ -1,0 +1,336 @@
+ <!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Untukmu, Sebuah Pesan Rindu</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Georgia', 'Times New Roman', serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0d001a, #2a0845, #12002b);
+            color: #f1e4e8;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+            padding: 20px;
+        }
+
+        .petal {
+            position: fixed;
+            top: -10%;
+            background-color: #ff758c;
+            border-radius: 150% 0 150% 0;
+            opacity: 0.7;
+            pointer-events: none;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0.8;
+            }
+            100% {
+                transform: translateY(105vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.07);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            border-radius: 20px;
+            padding: 35px 25px;
+            max-width: 550px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+            position: relative;
+            z-index: 10;
+        }
+
+        .slide {
+            display: none;
+            animation: fadeIn 0.8s ease forwards;
+        }
+
+        .slide.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h2 {
+            font-size: 1.6rem;
+            color: #ffb3c1;
+            margin-bottom: 18px;
+            font-style: italic;
+        }
+
+        p {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            color: #e2d1f9;
+        }
+
+        .puzzle-box {
+            margin: 20px 0;
+        }
+
+        input[type="text"] {
+            width: 80%;
+            padding: 12px;
+            border-radius: 25px;
+            border: 1px solid #ff758c;
+            background: rgba(0,0,0,0.3);
+            color: #fff;
+            text-align: center;
+            font-size: 1rem;
+            outline: none;
+            margin-bottom: 15px;
+        }
+
+        button.btn {
+            background: linear-gradient(45deg, #ff758c, #ff7eb3);
+            color: white;
+            border: none;
+            padding: 12px 28px;
+            border-radius: 25px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 117, 140, 0.4);
+            margin: 5px;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        button.btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 117, 140, 0.6);
+        }
+
+        .cargift-btn {
+            background: linear-gradient(45deg, #7b2cbf, #9d4edd);
+            box-shadow: 0 4px 15px rgba(157, 78, 221, 0.4);
+            font-weight: bold;
+            font-size: 1.1rem;
+            padding: 14px 32px;
+        }
+
+        .dots {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 25px;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            background: rgba(255,255,255,0.3);
+            border-radius: 50%;
+            transition: 0.3s;
+        }
+
+        .dot.active {
+            background: #ff758c;
+            width: 25px;
+            border-radius: 10px;
+        }
+
+        .music-player {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(0,0,0,0.6);
+            padding: 10px 15px;
+            border-radius: 30px;
+            border: 1px solid rgba(255,255,255,0.2);
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .music-btn {
+            background: #ff758c;
+            border: none;
+            color: white;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .music-title {
+            font-size: 0.8rem;
+            color: #ffb3c1;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Animasi Kelopak Bunga -->
+    <script>
+        for(let i=0; i<25; i++){
+            let petal = document.createElement('div');
+            petal.className = 'petal';
+            petal.style.left = Math.random() * 100 + 'vw';
+            petal.style.width = Math.random() * 12 + 8 + 'px';
+            petal.style.height = Math.random() * 15 + 10 + 'px';
+            petal.style.animationDuration = Math.random() * 5 + 5 + 's';
+            petal.style.animationDelay = Math.random() * 5 + 's';
+            document.body.appendChild(petal);
+        }
+    </script>
+
+    <!-- Audio Player: Dewa 19 - Aku Milikmu -->
+    <audio id="bg-music" loop preload="auto">
+        <source src="https://archive.org/download/dewa-19-aku-milikmu/Dewa%2019%20-%20Aku%20Milikmu.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="music-player">
+        <button class="music-btn" onclick="toggleMusic()" id="playBtn">▶</button>
+        <span class="music-title">🎵 Dewa 19 - Aku Milikmu</span>
+    </div>
+
+    <div class="container">
+
+        <!-- Slide 1: Teka Teki -->
+        <div class="slide active" id="slide1">
+            <h2>Teka-Teki Sebelum Melangkah</h2>
+            <p>Sesuatu yang tak pernah hilang meski waktu dan jarak memisahkan. Berawal dari kenangan, berujung pada rasa. Siapakah itu?</p>
+            <div class="puzzle-box">
+                <input type="text" id="answer" placeholder="Ketik jawabannya di sini...">
+                <br>
+                <button class="btn" onclick="checkAnswer()">Buka Jawaban ✨</button>
+            </div>
+            <p id="error-msg" style="color: #ff758c; font-size: 0.9rem; display:none;">Petunjuk: Ketik apa saja untuk melanjutkan...</p>
+        </div>
+
+        <!-- Slide 2 -->
+        <div class="slide" id="slide2">
+            <h2>Bab I: Jejak yang Tertinggal</h2>
+            <p>Sore itu, waktu seolah berjalan lebih lambat. Di antara hiruk-pikuk dunia, namamu tetap menjadi bisikan yang paling riuh di kepalaku.</p>
+            <p>Ada kenangan yang tak pernah pudar, terpahat rapi dalam tiap sudut ingatan.</p>
+            <button class="btn" onclick="nextSlide(3)">Lanjut ▶</button>
+        </div>
+
+        <!-- Slide 3 -->
+        <div class="slide" id="slide3">
+            <h2>Bab II: Sastra Rindu</h2>
+            <p><em>"Aku milikmu, kamu milikku... Senyummu, pelukmu, adalah tempatku pulang."</em></p>
+            <p>Bahasa sastra tak pernah cukup melukiskan bagaimana rasanya kehilangan arah saat kamu tak lagi bersisian.</p>
+            <button class="btn" onclick="nextSlide(4)">Lanjut ▶</button>
+        </div>
+
+        <!-- Slide 4 -->
+        <div class="slide" id="slide4">
+            <h2>Bab III: Bayang dan Sunyi</h2>
+            <p>Dalam riuhnya malam, aku menyadari satu hal: keberadaanmu pernah memberi warna yang tak mampu digantikan oleh siapapun.</p>
+            <button class="btn" onclick="nextSlide(5)">Lanjut ▶</button>
+        </div>
+
+        <!-- Slide 5 -->
+        <div class="slide" id="slide5">
+            <h2>Bab IV: Lembaran Lama</h2>
+            <p>Setiap foto, cerita, dan canda tawa lama kita... masih tersimpan hangat tanpa berkurang sedikit pun nilainya.</p>
+            <button class="btn" onclick="nextSlide(6)">Lanjut ▶</button>
+        </div>
+
+        <!-- Slide 6 -->
+        <div class="slide" id="slide6">
+            <h2>Bab V: Pengakuan Sederhana</h2>
+            <p>Aku pernah mencoba melangkah jauh, namun titik akhirnya selalu bermuara pada kenangan tentangmu.</p>
+            <button class="btn" onclick="nextSlide(7)">Lanjut ▶</button>
+        </div>
+
+        <!-- Slide 7 -->
+        <div class="slide" id="slide7">
+            <h2>Bab VI: Pengharapan</h2>
+            <p>Mungkin kita pernah terjatuh dalam ego, tapi rasa ini tetap tulus dan tak pernah berubah sedikit pun.</p>
+            <button class="btn" onclick="nextSlide(8)">Lanjut ▶</button>
+        </div>
+
+        <!-- Slide 8 -->
+        <div class="slide" id="slide8">
+            <h2>Bab VII: Sebuah Bisikan</h2>
+            <p>Sebelum kamu melangkah ke slide terakhir, ada satu rahasia kecil yang ingin kusampaikan padamu...</p>
+            <button class="btn" onclick="nextSlide(9)">Buka Kejutan 🎁</button>
+        </div>
+
+        <!-- Slide 9: Penutup & Link Car Gift -->
+        <div class="slide" id="slide9">
+            <h2>Sebuah Kejutan Untukmu ✨</h2>
+            <p>Terima kasih sudah membaca sampai sejauh ini. Aku telah menyiapkan pesan dan kejutan tersimpan khusus untukmu.</p>
+            <p>Klik tombol di bawah ini untuk melihat apa yang ingin kukatakan padamu:</p>
+            
+            <!-- Link Car Gift Kamu -->
+            <a href="https://cargift.duckdns.org/uci-429/" target="_blank" class="btn cargift-btn">🎁 Buka Pesan Kejutan</a>
+        </div>
+
+        <!-- Indikator Slide -->
+        <div class="dots">
+            <div class="dot active"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+        </div>
+    </div>
+
+    <script>
+        let music = document.getElementById("bg-music");
+        let playBtn = document.getElementById("playBtn");
+
+        function toggleMusic() {
+            if (music.paused) {
+                music.play().catch(e => console.log(e));
+                playBtn.innerText = "❚❚";
+            } else {
+                music.pause();
+                playBtn.innerText = "▶";
+            }
+        }
+
+        function checkAnswer() {
+            let ans = document.getElementById("answer").value.trim();
+            if (ans !== "") {
+                music.play().catch(e => console.log(e));
+                playBtn.innerText = "❚❚";
+                nextSlide(2);
+            } else {
+                document.getElementById("error-msg").style.display = "block";
+            }
+        }
+
+        function nextSlide(slideNum) {
+            document.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
+            document.getElementById('slide' + slideNum).classList.add('active');
+
+            let dots = document.querySelectorAll('.dot');
+            dots.forEach(d => d.classList.remove('active'));
+            dots[slideNum - 1].classList.add('active');
+        }
+    </script>
+</body>
+</html>
