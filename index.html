@@ -353,15 +353,14 @@ function toggleMusic() {
         }
 
         function checkAnswer() {
-            let ans = document.getElementById("answer").value.trim();
-            if (ans !== "") {
-                music.play().catch(e => console.log(e));
-                playBtn.innerText = "❚❚";
-                nextSlide(2);
-            } else {
-                document.getElementById("error-msg").style.display = "block";
-            }
-        }
+    let ans = document.getElementById("answer").value.trim();
+
+    if (ans !== "") {
+        nextSlide(2);
+    } else {
+        document.getElementById("error-msg").style.display = "block";
+    }
+}
 
         function nextSlide(slideNum) {
             document.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
